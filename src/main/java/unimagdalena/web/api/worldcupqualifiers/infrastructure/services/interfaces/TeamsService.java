@@ -2,9 +2,7 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.services.interfac
 
 import java.util.List;
 
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.CreateTeamDto;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.UpdateTeamDto;
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.*;
 
 public interface TeamsService {
     List<TeamDto> getAll();

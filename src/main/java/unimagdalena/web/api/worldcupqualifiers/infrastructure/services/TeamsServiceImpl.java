@@ -7,14 +7,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.CreateTeamDto;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.UpdateTeamDto;
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.*;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.mappers.TeamsMapper;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.models.Person;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.models.Team;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.repositories.PersonsRepository;
-import unimagdalena.web.api.worldcupqualifiers.infrastructure.repositories.TeamsRepository;
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.models.*;
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.repositories.*;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.services.interfaces.TeamsService;
 
 @Service
