@@ -56,4 +56,16 @@ public class Match {
     public void setChiefReferee(Person chiefReferee) {
         this.chiefReferee = chiefReferee;
     }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public Team getLocalTeam() {
+        return matchTeam.getLocalTeam();
+    }
+
+    public Team getVisitorTeam() {
+        return matchTeam.getVisitorTeam();
+    }
 }

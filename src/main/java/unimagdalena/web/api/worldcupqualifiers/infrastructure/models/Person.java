@@ -1,6 +1,8 @@
 package unimagdalena.web.api.worldcupqualifiers.infrastructure.models;
 
 import java.time.LocalDate;
+import java.time.Period;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -79,4 +81,15 @@ public class Person {
     public void setPhotographyUrl(String photographyUrl) {
         this.photographyUrl = photographyUrl;
     }
+
+    public String getFullName() {
+        return firstName + " " + (middleName == null? "" : middleName) +
+            lastName + (secoundLastName == null? "" : " " + secoundLastName);
+    }
+
+    public Integer getAge() {
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(dateOfBirth, currentDate).getYears();
+    }
+
 }
