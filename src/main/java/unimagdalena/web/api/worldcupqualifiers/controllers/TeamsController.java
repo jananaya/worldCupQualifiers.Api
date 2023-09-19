@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
@@ -19,9 +20,15 @@ public class TeamsController {
         this.teamsService = teamsService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<TeamDto>> getAll() {
         List<TeamDto> teams = teamsService.getAll();
+        return ResponseEntity.ok().body(teams);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TeamDto>> findByName(@RequestParam("nombre") String name) {
+        List<TeamDto> teams = teamsService.findByName(name);
         return ResponseEntity.ok().body(teams);
     }
 }

@@ -5,4 +5,5 @@ import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
 
 public interface TeamsService {
     List<TeamDto> getAll();
+    List<TeamDto> findByName(String name);
 }

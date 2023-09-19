@@ -2,6 +2,8 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
@@ -12,7 +14,6 @@ import unimagdalena.web.api.worldcupqualifiers.infrastructure.services.interface
 
 @Service
 public class TeamsServiceImpl implements TeamsService {
-
     private final TeamsRepository teamsRepository;
     private final TeamsMapper teamsMapper;
 
@@ -24,10 +25,21 @@ public class TeamsServiceImpl implements TeamsService {
     @Override
     public List<TeamDto> getAll() {
         List<Team> teams = teamsRepository.findAll();
+        return teamsMapper.toTeamDtos(teams);
+    }
 
-        return teams.stream()
-            .map(t -> teamsMapper.teamToTeamDto(t))
-            .sorted((t1, t2) -> t1.getName().compareTo(t2.getName()))
-            .toList();
+    @Override
+    public List<TeamDto> findByName(String name) {
+        ExampleMatcher matcher = ExampleMatcher.matching()
+            .withIgnoreCase()
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Team team = new Team();
+        team.setName(name);
+
+        Example<Team> example = Example.of(team, matcher);
+        List<Team> teams = teamsRepository.findAll(example);
+
+        return teamsMapper.toTeamDtos(teams);
     }
 }
