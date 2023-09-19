@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.CreateTeamDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.TeamDto;
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.UpdateTeamDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.mappers.TeamsMapper;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.models.Person;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.models.Team;
@@ -52,12 +53,24 @@ public class TeamsServiceImpl implements TeamsService {
     @Override
     public TeamDto createTeam(CreateTeamDto dto) {
         Team team = new Team();
-        Optional<Person> manager = personsRepository.findById(dto.getManagerId());
+        Optional<Person> managerOptional = personsRepository.findById(dto.getManagerId());
 
         team.setName(dto.getName());
         team.setFlagUrl(dto.getFlagUrl());
-        team.setManager(manager.get());
+        team.setManager(managerOptional.get());
 
         return teamsMapper.teamToTeamDto(teamsRepository.save(team));
+    }
+
+    @Override
+    public TeamDto updateTeam(Long id, UpdateTeamDto dto) {
+        Team existingTeam = teamsRepository.findById(id).orElse(null);
+        Optional<Person> managerOptional = personsRepository.findById(dto.getManagerId());
+
+        existingTeam.setName(dto.getName());
+        existingTeam.setFlagUrl(dto.getFlagUrl());
+        existingTeam.setManager(managerOptional.get());
+
+        return teamsMapper.teamToTeamDto(teamsRepository.save(existingTeam));
     }
 }
