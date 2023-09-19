@@ -3,6 +3,8 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PersonDto {
+    private Long id;
+
     @JsonProperty("nombreCompleto")
     private String fullName;
 
@@ -12,6 +14,12 @@ public class PersonDto {
     @JsonProperty("edad")
     private Integer age;
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getFullName() {
         return fullName;
     }
