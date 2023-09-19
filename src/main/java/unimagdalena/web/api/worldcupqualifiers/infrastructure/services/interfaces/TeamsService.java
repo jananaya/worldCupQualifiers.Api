@@ -11,4 +11,5 @@ public interface TeamsService {
     List<TeamDto> findByName(String name);
     TeamDto createTeam(CreateTeamDto dto);
     TeamDto updateTeam(Long id, UpdateTeamDto dto);
+    void deleteTeam(Long id);
 }

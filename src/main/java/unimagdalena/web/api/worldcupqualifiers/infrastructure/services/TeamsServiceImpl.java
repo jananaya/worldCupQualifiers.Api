@@ -73,4 +73,9 @@ public class TeamsServiceImpl implements TeamsService {
 
         return teamsMapper.teamToTeamDto(teamsRepository.save(existingTeam));
     }
+
+    @Override
+    public void deleteTeam(Long id) {
+        teamsRepository.deleteById(id);
+    }
 }

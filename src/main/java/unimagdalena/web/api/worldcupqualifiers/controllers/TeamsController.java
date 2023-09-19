@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,5 +58,11 @@ public class TeamsController {
     public ResponseEntity<TeamDto> updateTeam(@PathVariable Long id, @RequestBody UpdateTeamDto updateTeamDto) {
         TeamDto team = teamsService.updateTeam(id, updateTeamDto);
         return ResponseEntity.ok().body(team);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTeamEntity(@PathVariable Long id) {
+        teamsService.deleteTeam(id);
+        return ResponseEntity.noContent().build();
     }
 }
