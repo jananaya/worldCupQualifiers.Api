@@ -6,4 +6,5 @@ import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.FindMatchesDt
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.MatchDto;
 public interface MatchesService {
     List<MatchDto> findMatches(FindMatchesDto query);
+    MatchDto findMatchById(Long id);
 }

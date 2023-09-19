@@ -33,4 +33,15 @@ public class MatchesServiceImp implements MatchesService {
         return matchesMapper.toMatchDtos(matches);
     }
 
+    @Override
+    public MatchDto findMatchById(Long id) {
+        Match match = matchesRepository.findById(id).orElse(null);
+
+        if (match == null) {
+            return null;
+        }
+
+        return matchesMapper.matchToMatchDto(match);
+    }
+
 }

@@ -22,4 +22,13 @@ public class MatchesController {
     public ResponseEntity<List<MatchDto>> findMatches(@ModelAttribute FindMatchesDto queryDto) {
         return ResponseEntity.ok().body(matchesService.findMatches(queryDto));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MatchDto> findMatchById(@PathVariable Long id) {
+        MatchDto match = matchesService.findMatchById(id);
+
+        return match == null?
+            ResponseEntity.notFound().build() :
+            ResponseEntity.ok().body(match);
+    }
 }
