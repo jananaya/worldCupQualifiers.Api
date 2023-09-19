@@ -1,6 +1,6 @@
 package unimagdalena.web.api.worldcupqualifiers.infrastructure.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +11,7 @@ public class Match {
     private Long id;
 
     @Column(name = "momento_realización")
-    private Date timeOfRealization;
+    private LocalDateTime timeOfRealization;
 
     @ManyToOne
     @JoinColumn(name = "id_estadio")
@@ -33,11 +33,11 @@ public class Match {
         return id;
     }
 
-    public Date getTimeOfRealization() {
+    public LocalDateTime getTimeOfRealization() {
         return timeOfRealization;
     }
 
-    public void setTimeOfRealization(Date timeOfRealization) {
+    public void setTimeOfRealization(LocalDateTime timeOfRealization) {
         this.timeOfRealization = timeOfRealization;
     }
 
@@ -68,4 +68,13 @@ public class Match {
     public Team getVisitorTeam() {
         return matchTeam.getVisitorTeam();
     }
+
+    public MatchTeam getMatchTeam() {
+        return matchTeam;
+    }
+
+    public void setMatchTeam(MatchTeam matchTeam) {
+        this.matchTeam = matchTeam;
+    }
+
 }

@@ -1,10 +1,13 @@
 package unimagdalena.web.api.worldcupqualifiers.controllers;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.CreateMatchDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.FindMatchesDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.MatchDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.services.interfaces.MatchesService;
@@ -30,5 +33,18 @@ public class MatchesController {
         return match == null?
             ResponseEntity.notFound().build() :
             ResponseEntity.ok().body(match);
+    }
+
+    @PostMapping
+    public ResponseEntity<MatchDto> createMatch(@RequestBody CreateMatchDto createMatchDto) {
+        MatchDto match = matchesService.createMatch(createMatchDto);
+
+        String location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(match.getId())
+            .toUriString();
+
+        return ResponseEntity.created(URI.create(location)).body(match);
     }
 }

@@ -1,6 +1,6 @@
 package unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -8,7 +8,7 @@ public class MatchDto {
     private Long id;
 
     @JsonProperty("fecha")
-    private Date timeOfRealization;
+    private LocalDateTime timeOfRealization;
 
     @JsonProperty("estadio")
     private String stadium;
@@ -33,11 +33,11 @@ public class MatchDto {
         this.id = id;
     }
 
-    public Date getTimeOfRealization() {
+    public LocalDateTime getTimeOfRealization() {
         return timeOfRealization;
     }
 
-    public void setTimeOfRealization(Date timeOfRealization) {
+    public void setTimeOfRealization(LocalDateTime timeOfRealization) {
         this.timeOfRealization = timeOfRealization;
     }
 

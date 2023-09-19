@@ -2,6 +2,8 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.utils;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +36,7 @@ public class MatchesQueryBuilder {
             Date date = Date.valueOf(LocalDate.parse(dateStr, formatter));
 
             matchesCollection = matchesCollection.stream()
-                .filter(match -> match.getTimeOfRealization().getTime() == date.getTime())
+                .filter(match -> Date.from(match.getTimeOfRealization().atZone(ZoneId.systemDefault()).toInstant()).getTime() == date.getTime())
                 .toList();
         }
 
