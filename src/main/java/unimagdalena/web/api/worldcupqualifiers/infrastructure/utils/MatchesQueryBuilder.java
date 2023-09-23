@@ -3,7 +3,6 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.utils;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;

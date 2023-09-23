@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.validation.Valid;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.*;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.services.interfaces.TeamsService;
 
@@ -32,7 +33,7 @@ public class TeamsController {
     }
 
     @PostMapping
-    public ResponseEntity<TeamDto> createTeam(@RequestBody CreateTeamDto createTeamDto) {
+    public ResponseEntity<TeamDto> createTeam(@RequestBody @Valid CreateTeamDto createTeamDto) {
         TeamDto team = teamsService.createTeam(createTeamDto);
 
         String location = ServletUriComponentsBuilder

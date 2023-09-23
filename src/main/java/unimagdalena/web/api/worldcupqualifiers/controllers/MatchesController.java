@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.validation.Valid;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.CreateMatchDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.FindMatchesDto;
 import unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos.MatchDto;
@@ -23,7 +24,7 @@ public class MatchesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MatchDto>> findMatches(@ModelAttribute FindMatchesDto queryDto) {
+    public ResponseEntity<List<MatchDto>> findMatches(@ModelAttribute @Valid FindMatchesDto queryDto) {
         return ResponseEntity.ok().body(matchesService.findMatches(queryDto));
     }
 
@@ -39,7 +40,7 @@ public class MatchesController {
     }
 
     @PostMapping
-    public ResponseEntity<MatchDto> createMatch(@RequestBody CreateMatchDto createMatchDto) {
+    public ResponseEntity<MatchDto> createMatch(@RequestBody @Valid CreateMatchDto createMatchDto) {
         MatchDto match = matchesService.createMatch(createMatchDto);
 
         String location = ServletUriComponentsBuilder

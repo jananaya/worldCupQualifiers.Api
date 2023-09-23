@@ -2,13 +2,23 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class CreateTeamDto {
+    @NotNull
+    @NotBlank
     @JsonProperty("nombre")
     private String name;
 
+    @NotNull
+    @NotBlank
     @JsonProperty("bandera")
     private String flagUrl;
 
+    @NotNull
+    @Positive
     @JsonProperty("idDirectorTecnico")
     private Long managerId;
 
