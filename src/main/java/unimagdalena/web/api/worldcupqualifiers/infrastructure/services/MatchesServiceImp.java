@@ -3,6 +3,7 @@ package unimagdalena.web.api.worldcupqualifiers.infrastructure.services;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -44,14 +45,14 @@ public class MatchesServiceImp implements MatchesService {
     }
 
     @Override
-    public MatchDto findMatchById(Long id) {
-        Match match = matchesRepository.findById(id).orElse(null);
+    public Optional<MatchDto> findMatchById(Long id) {
+        Optional<Match> match = matchesRepository.findById(id);
 
-        if (match == null) {
-            return null;
+        if (!match.isPresent()) {
+            return Optional.empty();
         }
 
-        return matchesMapper.matchToMatchDto(match);
+        return Optional.of(matchesMapper.matchToMatchDto(match.get()));
     }
 
     @Override

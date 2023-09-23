@@ -2,6 +2,7 @@ package unimagdalena.web.api.worldcupqualifiers.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,13 @@ public class MatchesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MatchDto> findMatchById(@PathVariable Long id) {
-        MatchDto match = matchesService.findMatchById(id);
+        Optional<MatchDto> match = matchesService.findMatchById(id);
 
-        return match == null?
-            ResponseEntity.notFound().build() :
-            ResponseEntity.ok().body(match);
+        if (match.isPresent()) {
+            return ResponseEntity.ok().body(match.get());
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
