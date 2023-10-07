@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,11 +24,13 @@ public class MatchesController {
         this.matchesService = matchesService;
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<MatchDto>> findMatches(@ModelAttribute @Valid FindMatchesDto queryDto) {
         return ResponseEntity.ok().body(matchesService.findMatches(queryDto));
     }
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<MatchDto> findMatchById(@PathVariable Long id) {
         Optional<MatchDto> match = matchesService.findMatchById(id);
@@ -39,6 +42,7 @@ public class MatchesController {
         return ResponseEntity.notFound().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<MatchDto> createMatch(@RequestBody @Valid CreateMatchDto createMatchDto) {
         MatchDto match = matchesService.createMatch(createMatchDto);
